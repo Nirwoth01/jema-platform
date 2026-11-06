@@ -2,6 +2,7 @@ import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from 
 import {
   BadRequestException,
   ConflictException,
+  Inject,
   Injectable,
   ServiceUnavailableException,
   UnauthorizedException,
@@ -82,8 +83,8 @@ const genericRecoveryMessage = 'Si un compte correspondant existe, les instructi
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly database: DatabaseService,
-    private readonly passwords: PasswordService,
+    @Inject(DatabaseService) private readonly database: DatabaseService,
+    @Inject(PasswordService) private readonly passwords: PasswordService,
   ) {}
 
   async register(dto: RegisterDto): Promise<{ user: AuthenticatedUser; developmentCode?: string }> {

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Header, Inject, Patch, UseGuards } from '@nestjs/common';
 import { CurrentUser } from '../common/decorators/current-user.decorator.js';
 import type { AuthenticatedUser } from '../common/security/authenticated-user.js';
 import { CsrfGuard } from '../common/security/csrf.guard.js';
@@ -9,7 +9,7 @@ import { UsersService } from './users.service.js';
 @Controller('users')
 @UseGuards(SessionAuthGuard, CsrfGuard)
 export class UsersController {
-  constructor(private readonly users: UsersService) {}
+  constructor(@Inject(UsersService) private readonly users: UsersService) {}
 
   @Get('me')
   @Header('Cache-Control', 'no-store')

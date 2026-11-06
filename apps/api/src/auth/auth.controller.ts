@@ -6,6 +6,7 @@ import {
   Header,
   HttpCode,
   HttpStatus,
+  Inject,
   Post,
   Req,
   Res,
@@ -32,7 +33,7 @@ import { AuthService } from './auth.service.js';
 @Controller('auth')
 @UseGuards(CsrfGuard)
 export class AuthController {
-  constructor(private readonly auth: AuthService) {}
+  constructor(@Inject(AuthService) private readonly auth: AuthService) {}
 
   @Get('csrf')
   @Header('Cache-Control', 'no-store')

@@ -7,6 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
+import { env } from '../../config/env.js';
 
 @Catch()
 export class ApiExceptionFilter implements ExceptionFilter {
@@ -21,7 +22,10 @@ export class ApiExceptionFilter implements ExceptionFilter {
       : HttpStatus.INTERNAL_SERVER_ERROR;
 
     if (!(exception instanceof HttpException)) {
-      this.logger.error(`Erreur interne pour la requête ${response.locals.requestId ?? 'inconnue'}.`);
+      const detail = env.NODE_ENV === 'development' && exception instanceof Error
+        ? exception.stack
+        : undefined;
+      this.logger.error(`Erreur interne pour la requête ${response.locals.requestId ?? 'inconnue'}.`, detail);
     }
 
     const exceptionPayload = exception instanceof HttpException ? exception.getResponse() : undefined;
