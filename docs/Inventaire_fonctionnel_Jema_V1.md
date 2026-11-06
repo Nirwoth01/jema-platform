@@ -4,6 +4,12 @@
 
 Jema est une plateforme de commerce en ligne pour la RDC. Elle réunit une marketplace ouverte, une boutique e-commerce Jema, des ventes confiées à Jema et la recherche de produits à la demande. Le schéma V1 doit permettre de lancer ces parcours sans figer les décisions commerciales encore en discussion.
 
+## État d’implémentation
+
+- **Comptes et accès :** première version de l’API en place — inscription, vérification, connexion, sessions, déconnexion, récupération du mot de passe et profil courant.
+- **Livraison SMS/e-mail :** pas encore connectée. Les codes sont retournés uniquement en développement local; un adaptateur fournisseur est requis avant la mise en production.
+- **Autres modules métier :** décrits et prévus, pas encore implémentés.
+
 ## Modules fonctionnels
 
 1. **Comptes et accès** — inscription, connexion, récupération du mot de passe, vérification du téléphone ou de l’adresse e-mail, sessions, rôles et permissions.

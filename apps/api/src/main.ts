@@ -20,6 +20,17 @@ async function bootstrap(): Promise<void> {
     standardHeaders: true,
     legacyHeaders: false,
   }));
+  app.use('/api/v1/auth', rateLimit({
+    windowMs: 15 * 60_000,
+    limit: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+      statusCode: 429,
+      error: 'Trop de requêtes',
+      message: 'Trop de tentatives. Réessayez plus tard.',
+    },
+  }));
   app.use(json({ limit: '1mb' }));
   app.use(urlencoded({ extended: false, limit: '1mb' }));
   app.use((_request: Request, response: Response, next: NextFunction) => {

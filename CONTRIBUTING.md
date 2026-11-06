@@ -20,4 +20,4 @@ Depuis la racine du dépôt, lancer la compilation TypeScript de l’API :
 npm run build:api
 ```
 
-Les tests automatisés seront ajoutés avec les premiers modules métier.
+Ajouter les tests automatisés avec les prochains modules métier et couvrir en priorité les autorisations, les transitions d’état et les opérations financières sensibles.

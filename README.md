@@ -2,7 +2,7 @@
 
 **Marketplace et plateforme e-commerce conçues pour la République démocratique du Congo.** Jema réunit vendeurs, clients et équipe Jema dans un même espace pour publier, rechercher, négocier, acheter et vendre des biens et des services.
 
-> **État du projet :** développement initial. Le schéma PostgreSQL V1 et le socle de l’API sont en place. Les modules métier et les intégrations de paiement restent à construire.
+> **État du projet :** fondations et premier module métier en cours. Le schéma PostgreSQL V1, le socle de l’API et l’authentification des comptes sont en place. Les fournisseurs de vérification SMS/e-mail, le catalogue, les commandes et les intégrations de paiement restent à construire.
 
 ## Vision produit
 
@@ -31,6 +31,7 @@ La plateforme prend également en charge les biens, les services, les paniers et
 - **Données :** PostgreSQL 18 avec SQL versionné et requêtes paramétrées via le pilote `pg`.
 - **Opérations sensibles :** transactions PostgreSQL pour les changements financiers et de stock.
 - **Stockage de secrets :** variables locales dans `apps/api/.env`; ne jamais publier ce fichier ni des données de paiement.
+- **Comptes :** Argon2id pour les mots de passe, sessions opaques en cookie HttpOnly, protection CSRF et codes à usage unique.
 
 Voir le [document d’architecture](docs/Architecture_Jema_RDC.docx), la [décision technique](docs/Decision_stack_technique_Jema_V1.md) et l’[inventaire fonctionnel](docs/Inventaire_fonctionnel_Jema_V1.md).
 
@@ -42,7 +43,7 @@ database/       schéma initial et documentation de base
 docs/           architecture, décisions et exigences produit
 ```
 
-Le détail de l’installation est dans le [guide de l’API](apps/api/README.md) et le [guide de base de données](database/README.md).
+Le détail de l’installation et des routes d’authentification est dans le [guide de l’API](apps/api/README.md); le [guide de base de données](database/README.md) décrit la création de `jema_dev`.
 
 ## Démarrage local
 
@@ -60,6 +61,8 @@ Prérequis : Node.js 26 (version indiquée par `.nvmrc`) et PostgreSQL 18. NestJ
    ```powershell
    Copy-Item apps/api/.env.example apps/api/.env
    ```
+
+   Génère une clé aléatoire avec `node -e "console.log(require('node:crypto').randomBytes(32).toString('base64url'))"` et remplace `AUTH_TOKEN_PEPPER` dans ce fichier. Garde `AUTH_EXPOSE_DEV_CODES=true` uniquement en développement local.
 
 4. Lance l’API :
 
@@ -80,4 +83,4 @@ Les tables et l’architecture préparent le suivi des paiements, commissions, r
 
 ## Contribution
 
-Le dépôt est privé pendant le développement. Consulte [CONTRIBUTING.md](CONTRIBUTING.md) avant de modifier le schéma ou d’ajouter un module.
+Le dépôt est public. Ne publie jamais de secret, de fichier `.env`, de données réelles de clients, vendeurs ou paiements. Consulte [CONTRIBUTING.md](CONTRIBUTING.md) avant de modifier le schéma ou d’ajouter un module.

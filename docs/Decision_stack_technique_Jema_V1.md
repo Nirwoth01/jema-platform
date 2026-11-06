@@ -30,4 +30,4 @@ Statut : retenu
 
 ## Harmonisation documentaire
 
-Le document Word d’architecture a été mis à jour en version 0.5 pour refléter Next.js, NestJS, TypeScript, Node.js et PostgreSQL 18. Le développement du back-end a commencé avec la configuration, la connexion SQL et les routes de disponibilité.
+Le document Word d’architecture a été mis à jour en version 0.5 pour refléter Next.js, NestJS, TypeScript, Node.js et PostgreSQL 18. Le back-end inclut la configuration, l’accès SQL, les routes de disponibilité et le premier module de comptes avec sessions sécurisées. La livraison des codes de vérification SMS/e-mail reste à intégrer avant la production.
