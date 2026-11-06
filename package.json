@@ -1,0 +1,16 @@
+{
+  "name": "jema-platform",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/api"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev:api": "npm run start:dev --workspace @jema/api",
+    "build:api": "npm run build --workspace @jema/api",
+    "start:api": "npm run start --workspace @jema/api"
+  }
+}
